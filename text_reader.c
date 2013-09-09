@@ -11,15 +11,16 @@ void read_nodes(node_t **nodes, int *num_nodes, FILE *nodefile)
     int i;
     char line[BUFFERSIZE];    /* allocate a largeish buffer for fgets */
 
-    fgets(line, BUFFERSIZE, nodefile);
+    if (fgets(line, BUFFERSIZE, nodefile) == NULL) {
+        return;
+    }
     sscanf(line, "%d", num_nodes);
     *nodes = (node_t *)malloc(*num_nodes * sizeof(node_t));
 
     for (i = 0; i < *num_nodes; i++) {
-        if (feof(nodefile)) {
+        if (fgets(line, BUFFERSIZE, nodefile) == NULL) {
             break;
         }
-        fgets(line, BUFFERSIZE, nodefile);
         sscanf(line, "%d %f %f %d %d %d %d",
             &((*nodes)[i].id),
             &((*nodes)[i].x),
