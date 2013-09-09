@@ -4,9 +4,17 @@
 
 #include "logger.h"
 
+const char default_nfname[] = "nodes.txt";
+
 int main(int argc, char **argv)
 {
-    write_log(1, "daddy would you like some sausage? %x %c\n", 29, 'y');
+    char *nfname;
+    if (argc > 1) {
+        nfname = argv[argc-1];
+    } else {
+        nfname = default_nfname;
+    }
+    write_log(0, "Using node file %s.\n", nfname);
     return 0;
 }
 

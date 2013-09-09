@@ -6,7 +6,8 @@ LIB = -lrt -lm -pthread -lblas -llapack
 LDFLAGS = $(LIB) -pg -g
 SRC = \
 	main.c \
-	logger.c
+	logger.c \
+	text_reader.c
 
 OBJ = $(SRC:.c=.o)
 
