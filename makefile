@@ -2,7 +2,7 @@
 CC = gcc
 BIN = hssim
 CFLAGS = -c -O3 -Wall -Wstrict-prototypes -pedantic -g -pg
-LIB = -lrt -lm -pthread -lblas -llapack
+LIB = -lrt -lm -pthread -lcxsparse
 LDFLAGS = $(LIB) -pg -g
 SRC = \
 	main.c \
