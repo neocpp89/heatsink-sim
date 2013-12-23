@@ -6,6 +6,9 @@ typedef struct node_s {
     float y;
     /* 0 = east, 1 = north, 2 = west, 3 = south, stored by id. */
     int neighbors[4];
+
+    /* properties */
+    float kappa;
 } node_t;
 #endif
 

@@ -3,6 +3,7 @@
 
 #include "node.h"
 #include "text_reader.h"
+#include "logger.h"
 
 #define BUFFERSIZE 1024
 
@@ -33,6 +34,28 @@ void read_nodes(node_t **nodes, int *num_nodes, FILE *nodefile)
 
     /* we should probably build an index to id map, but for now assume
         index = id. */
+
+    return;
+}
+
+void read_thermal_props(node_t *nodes, int num_nodes, FILE *kappafile)
+{
+    int i, j;
+    char line[BUFFERSIZE];    /* allocate a largeish buffer for fgets */
+
+    if (fgets(line, BUFFERSIZE, kappafile) == NULL) {
+        return;
+    }
+    sscanf(line, "%d", &j);
+
+    for (i = 0; i < num_nodes; i++) {
+        if (fgets(line, BUFFERSIZE, kappafile) == NULL) {
+            break;
+        }
+        sscanf(line, "%d %f",
+            &j,
+            &(nodes[i].kappa));
+    }
 
     return;
 }

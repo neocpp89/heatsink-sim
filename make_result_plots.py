@@ -18,7 +18,7 @@ for line in f:
     if (state == 0):
         state = 1
         i = 0
-        nn = int(line)
+        nn = int(line.split(" ")[0])
         X = range(0, nn)
         Y = range(0, nn)
         Z = range(0, nn)
@@ -41,5 +41,6 @@ plt.figure(1, figsize=(6,6))
 #plt.scatter(X, Y, c=Z, cmap=plt.cm.hot)
 plt.contourf(xi, yi, zi, cmap=plt.cm.hot)
 plt.colorbar()
-plt.savefig(sys.argv[1].split(".")[0]+'.pdf', bbox_inches=0)
+plt.savefig(".".join(sys.argv[1].split(".")[:-1]) +'.pdf', bbox_inches=0)
+plt.savefig(".".join(sys.argv[1].split(".")[:-1]) +'.png', bbox_inches=0)
 
