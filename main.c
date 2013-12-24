@@ -10,7 +10,7 @@
 
 char default_nfname[] = "nodes.txt";
 char default_kfname[] = "kappa.txt";
-char default_ofstr[] = "output_%d.txt";
+char default_ofstr[] = "jobs/default/output_%d.txt";
 
 cs *build_stiffness_matrix(double **f, node_t *nodes, int num_nodes, float dt);
 
@@ -60,7 +60,7 @@ cs *build_stiffness_matrix(double **f, node_t *nodes, int num_nodes, float dt)
 
         cs_entry(triplets, i, i,
             (1 + (dt/dy) * (k_vphalf/pdy + k_vnhalf/ndy) +
-                (dt/dx) * (k_hphalf/pdx + k_hphalf/ndx)));
+                (dt/dx) * (k_hphalf/pdx + k_hnhalf/ndx)));
 
         cs_entry(triplets, i, nodes[i].neighbors[0],
             (-(dt/dx) * (k_hphalf/pdx)));
@@ -102,7 +102,7 @@ int main(int argc, char **argv)
 
     t = 0;
     dt = 1e-2;
-    tf = 0.1;
+    tf = 1;
 
     if (argc > 1) {
         nfname = argv[argc-1];
@@ -174,9 +174,9 @@ int main(int argc, char **argv)
             free(u);
         }
         u = f;
-        for (i = 0; i < num_nodes; i++) {
+        /*for (i = 0; i < num_nodes; i++) {
             printf("T[%d] = %f\n", i, u[i]);
-        }
+        }*/
         t += dt;
         j++;
 
